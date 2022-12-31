@@ -13,6 +13,8 @@ Necessidade a ser atendida:
 <ul>
 <li>Débora Pereira de Souza (20191214010018)</li>
 <li>Deivid dos Santos Souza (20191214010012)</li>
+<li>Giovanna ()</li>
+<li>Maria Isabel ()</li>
 </ul>
 
 ##  Ferramentas e linguagem de desenvolvimento:
@@ -24,4 +26,3 @@ Necessidade a ser atendida:
 
 ## Referências:
 [Referência - Descrição](link)
-# ProjetoFinal
