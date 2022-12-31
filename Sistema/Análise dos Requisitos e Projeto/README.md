@@ -3,7 +3,7 @@
 
 Criar diagramas que apresentem o fluxo desses requisitos. Por exemplo, utilizar o Diagrama de Caso de Uso para cada requisito funcional listado anteriormente e que será implementado. Também criar o projeto do BD.
 
-<h1>Controle de Pedidos</h1>
+<h2>Controle de Pedidos</h2>
 <ul>
 <h2>Requisitos funcionais:</h2>
 <li></li>
