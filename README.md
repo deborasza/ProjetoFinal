@@ -25,4 +25,4 @@ Necessidade a ser atendida:
 </p>
 
 ## Referências:
-[Referência - Descrição](link)
+[Documentação - Python 3.11.1 documentation](https://docs.python.org/3/)
