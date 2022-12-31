@@ -13,7 +13,7 @@ Necessidade a ser atendida:
 <ul>
 <li>Débora Pereira de Souza (20191214010018)</li>
 <li>Deivid dos Santos Souza (20191214010012)</li>
-<li>Giovanna ()</li>
+<li>Giovanna Valentim de Almeida Cardins (20191214010029)</li>
 <li>Maria Isabel ()</li>
 </ul>
 
