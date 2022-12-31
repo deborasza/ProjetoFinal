@@ -27,7 +27,6 @@ def Visualizar_Dados():
     aba2_Texto.delete(1.0, 'end') #Deletar informações contidas no campo
     aba2_Texto.insert(END, texto) #Inserir Informações
 
-
 #Atualizar Dados
 def Atualizar_Dados():
     #Procedimento para captura dos dados digitados pelo usuário
