@@ -5,11 +5,32 @@ from tkinter import ttk #Módulo complementar ao tkinter
 #Importação da Biblioteca psycopg2
 import psycopg2
 
+#Gerar log de erro
+import traceback
+
+#Gerar janelas informativas para o usuário
+from tkinter import messagebox
+
+#Importação da Biblioteca reportlab
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import A4
+from reportlab.lib import colors
+from reportlab.platypus import Table
+from reportlab.platypus import TableStyle
+
 #Estabelecer uma conexão com o Banco de Dados - PostgreSQL
 conexao = psycopg2.connect(database = "PDS", user = "postgres", password = "kluyvert", host = "localhost", port = "5432")
-
 #Definição do cursor
 cursor = conexao.cursor()
+
+from turtle import width 
+width, height = A4
+
+#Rótulo --> Label
+#Entry --> Campo de Texto 
+#Button --> Botão 
+#Text --> área de texto
+#place --> Método para definir um elemento gráfico
 
 #Visualizar Dados
 def Visualizar_Dados():
@@ -89,11 +110,131 @@ def Remover_Dados():
     cliente = aba4_ClienteEntry.get()
 
     sql = f"delete from pedidos where cliente = '{cliente}'"
+    
+    #Tratamento de erros:
+    try:
+        cursor.execute(sql)
+        conexao.commit()
+        #Mensagem mostrada para o usuário, caso a operação funcione:
+        messagebox.showinfo('Sucesso!', 'Operação realizada com sucesso.')
+    except:
+        conexao.rollback()
+        traceback.print_exc()
+        #Mensagem mostrada para o usuário, caso a operação dê erro:
+        messagebox.showerror('Erro!', 'Operação mal sucedida!')
+    finally:
+        Limpar_Dados_Aba4()
 
-    cursor.execute(sql)
-    conexao.commit()
+#######################################################################################################################################################
+def Gerar_Relatorio():
+    try:
+        #Endereço onde o arquivo será criado + nome do arquivo
+        end_arq = "C:\\Users\\55849\\Downloads\\relatorio_animes.pdf"
+        
+        #Criação do arquivo pdf:
+        pdf = canvas.Canvas(end_arq, pagesize = A4)
+        #Metadados sobre o arquivo:
+        pdf.setTitle('Relatório de Animes')
+        pdf.setAuthor('Débora e Deivid')
+        pdf.setKeywords('Anime, Donghua, Animação, Japão, China')
+        
+        ##Escrevendo o conteúdo do arquivo pdf##
+        #Definição da fonte e do tamanho da letra:
+        pdf.setFont('Times-Bold', 20)
+        #Definição de um título para o arquivo pdf:
+        pdf.drawCentredString(width/2, 760, "Animes e Donghuas")
+        
+        #Definição de um subtítulo para o arquivo pdf:
+        pdf.setFont('Times-Roman', 15)
+        pdf.setFillColor(colors.brown) #Definição da cor da fonte
+        pdf.drawCentredString(width/2, 730, "Japão, China e suas animações")
+        
+        #Desenhando uma linha horizontal:
+        pdf.line(30, 700, 550, 700) #Coordenadas iniciais e finais da linha
 
-    Limpar_Dados_Aba4()
+        ##Inserção de um parágrafo:##
+        #Escrevendo o texto:
+        paragrafo = ['Os emocionantes animes, são as animações produzidas por estúdios do Japão.', 'Uma variação disso seriam os Donghuas, que são justamente as animações produzidas por estúdios da', 'China!!  Ambos com suas particularidades e com uma grande diversidade de gêneros, para todos os gostos.', 'Aqui você irá encontrar as melhores indicações de Animes e Donghuas, como também informações', 'ao seu respeito, personagens que mais nos cativam e muito mais!', ' ', 'Esperamos que possam se sentir estimulados a assistí-los e que, as informações aqui contidas, possam', 'ajudá-los a conhecer um poucos mais essas maravilhosas obras!!'] #As informações dentro das aspas, representa uma linha do arquivo pdf.
+
+        #Definindo onde esse texto irá começar:
+        text = pdf.beginText(40, 680)
+
+        #Definindo o tipo da fonte:
+        text.setFont('Times-Roman', 12)
+        text.setFillColor(colors.black) #Definindo a cor da fonte
+        
+        #Adicionando uma lista de itens:
+        text.textLines(paragrafo)
+        pdf.drawText(text)
+
+        #Lista de valores:
+        dados = [
+            ['Código do Anime', 'Nome do Anime', 'Temporadas', 'Episódios', 'Personagem Favorito¹', 'Personagem Favorito²'],
+        ]
+
+        #Definição da consulta SQL que retorna todos os dados da tabela 'animes':
+        sql = 'select * from animes'
+
+        cursor.execute(sql)
+        resultado = cursor.fetchall() #Lista de itens que estão no Banco de Dados
+        #print(resultado)
+        for linha in resultado:
+            #print("-------------------------------------------------------------------------------------------------------------------------------------")
+            cod = str(linha[0]) #Coluna onde está o código
+            n = str(linha[1]) #Coluna onde está o nome
+            temp = str(linha[2]) #Coluna onde está as temporadas
+            ep = str(linha[3]) #Coluna onde está os episódios
+            pf1 = str(linha[4]) #Coluna onde está o personagem fav1
+            pf2 = str(linha[5]) #Coluna onde está o personagem fav2
+            #print(f"Código: {cod} - Nome: {n} - Temporadas: {temp} - Episódios: {ep} - Personagem Favorito¹: {pf1} - Personagem Favorito²: {pf2}")
+            #Item que contém os dados que estão vindo do Banco de Dados:
+            item = [cod, n, temp, ep, pf1, pf2]
+            #Adição do item ao conjunto de dados:
+            dados.append(item)
+
+        #Criação da tabela:
+        tabela = Table(dados)
+
+        #Montando item por item
+        estilo = TableStyle([
+            #Cor de fundo da primeira linha:
+            ('BACKGROUND', (0,0), (6,0), colors.brown), 
+            #Cor do texto da primeira linha:
+            ('TEXTCOLOR', (0,0), (6,0), colors.whitesmoke), 
+            #Fonte da tabela inteira:
+            ('FONTNAME', (0,0), (6,-1), 'Courier-Bold'), #-1 representa o último elemento
+            #Tamanho da fonte:
+            ('FONTSIZE', (0,0), (6,-1), 8.5),
+            #Alinhamento do texto:
+            ('ALIGN', (0,0), (6,-1), 'CENTER'),
+            #Cor de fundo dos dados:
+            ('BACKGROUND', (0,1), (6,-1), colors.beige),
+            #Cor do texto dos dados:
+            ('TEXTCOLOR', (0,1), (6,-1), colors.black),
+            #Tamanho e cor da borda:
+            ('GRID', (0,0), (6,-1), 0.5, colors.brown)
+        ])
+        #Adicionar estilo à tabela:
+        tabela.setStyle(estilo)
+
+        #Tamanho da tabela:
+        tabela.wrapOn(pdf, 400, 100)
+        #Posicionamento da tabela:
+        tabela.drawOn(pdf, 30, 380) 
+        
+        #Inserir uma imagem:
+        imagem1 = "C:\\Users\\debor\\OneDrive\\Documentos\\IFRN\\Programação com Acesso a Banco de Dados\\Projeto\\1.jpg"
+        imagem2 = "C:\\Users\\debor\\OneDrive\\Documentos\\IFRN\\Programação com Acesso a Banco de Dados\\Projeto\\2.jpg"
+        pdf.drawInlineImage(imagem1, 35, 710)
+        pdf.drawInlineImage(imagem2, 450, 710)
+
+        #Salvando o arquivo:
+        pdf.save()
+
+        messagebox.showinfo('Sucesso!', 'Relatório gerado com sucesso.')
+    except:
+        messagebox.showerror('Erro!', 'Não foi possível gerar Relatório.')
+####################################################################################################################################################
 
 janela = Tk() #Janela recebe uma instância de Tk()
 
