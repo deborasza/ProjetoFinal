@@ -289,6 +289,9 @@ aba2_TextoLabel.place(x = 100 , y = 80)
 aba2_VisualizarButton = Button(aba2, width = 20, text = "Visualizar Dados", command = Visualizar_Dados)
 aba2_VisualizarButton.place(x = 300, y = 70)
 
+aba2_RelatorioButton = Button(aba2, width = 20, text = "Gerar Relatório", command = Gerar_Relatorio)
+aba2_RelatorioButton.place(x = 500, y = 70)
+
 aba2_Texto = Text(aba2)
 aba2_Texto.place(x = 100 , y = 120)
 
