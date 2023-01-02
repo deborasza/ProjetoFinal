@@ -3,7 +3,7 @@
 
 <h2>Sobre o projeto:</h2>
 
-Necessidade a ser atendida:
+<h3>Necessidade a ser atendida:</h3>
 <ul>
 <li>Controle de Pedidos</li>
 </ul>
