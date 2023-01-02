@@ -36,8 +36,8 @@ def Visualizar_Dados():
     texto = "" #Variável auxiliar
     
     for linha in result:
-        texto = texto + f"------------------------------------------------------------------------------ \nNome do Cliente: {str(linha[0])} \nPedido: {str(linha[1])} \nQuantidade: {str(linha[2])} \nValor Unitário: {str(linha[3])} \nValor total: {(linha[3])*(linha[2])} \n------------------------------------------------------------------------------ \n\n" # str - Converte em string
-        #print(f'Nome do Cliente: {linha[0]} - Pedido: {linha[1]} - Quantidade: {linha[2]} - Valor Unitário: {linha[3]} - Valor Total: {(linha[3])*(linha[2])}')
+        texto = texto + f"------------------------------------------------------------------------------ \nNome do Cliente: {str(linha[0])} \nPedido: {str(linha[1])} \nQuantidade: {str(linha[2])} \nValor Unitário: {str(linha[3])} \nValor total: {str(linha[4])} \n------------------------------------------------------------------------------ \n\n" # str - Converte em string
+        #print(f'Nome do Cliente: {linha[0]} - Pedido: {linha[1]} - Quantidade: {linha[2]} - Valor Unitário: {linha[3]} - Valor Total: {(linha[4]}')
 
     aba2_Texto.delete(1.0, 'end') #Deletar informações contidas no campo
     aba2_Texto.insert(END, texto) #Inserir Informações
@@ -49,10 +49,11 @@ def Atualizar_Dados():
     novo_pedido = aba3_NovoPedidoEntry.get()
     nova_quantidade = aba3_NovaQuantidadeEntry.get()
     novo_valor = aba3_NovoValorEntry.get()
+    novo_valor_total = (int(novo_valor))*(int(nova_quantidade))
 
     #print(f"Nome do Cliente: {cliente} - Novo pedido: {novo_pedido} - Nova Quantidade: {nova_quantidade} - Novo Valor Unitário: {novo_valor}")
 
-    sql = f"update pedidos set pedido = '{novo_pedido}', quantidade = {nova_quantidade}, valor = {novo_valor} where cliente = '{cliente}'"
+    sql = f"update pedidos set pedido = '{novo_pedido}', quantidade = {nova_quantidade}, valor_unitario = {novo_valor}, valor_total = {novo_valor_total} where cliente = '{cliente}'"
 
     #print(sql)
 
@@ -68,12 +69,10 @@ def Inserir_Dados():
     pedido = aba1_PedidoEntry.get() #Obtém o pedido do cliente
     quantidade = aba1_QuantidadeEntry.get() #Obtém a quantidade de pedidos
     valor_unitario = aba1_ValorEntry.get() #Obtém o valor do pedido
-    valor_total = valor_unitario*quantidade
-
-    #print(f"Nome do Cliente: {cliente} - Pedido: {pedido} - Quantidade: {quantidade} - Valor Unitário: {valor_unitario} - Valor Total: {valor_total}")
+    valor_total = (int(valor_unitario))*(int(quantidade))
     
     #Construção da consulta SQL
-    sql = f"insert into pedidos values ('{cliente}','{pedido}',{quantidade},{valor_unitario}, {valor_total})"
+    sql = f"insert into pedidos values ('{cliente}','{pedido}',{quantidade},{valor_unitario},{valor_total})"
     
     #Procedimento para executar a consulta
     cursor.execute(sql)
@@ -123,7 +122,7 @@ def Remover_Dados():
 def Gerar_Relatorio():
     try:
         #Endereço onde o arquivo será criado + nome do arquivo
-        end_arq = "C:\\Users\\55849\\Documents\\ProjetoFinal\\Sistema\\Relatório\\relatorio_pedidos.pdf"\
+        end_arq = "C:\\Users\\55849\\Documents\\ProjetoFinal\\Sistema\\Relatório\\relatorio_pedidos.pdf"
         
         #Criação do arquivo pdf:
         pdf = canvas.Canvas(end_arq, pagesize = A4)
@@ -178,7 +177,7 @@ def Gerar_Relatorio():
             p = str(linha[1]) #Coluna onde está o pedido
             quant = str(linha[2]) #Coluna onde está a quantidade
             vu = str(linha[3]) #Coluna onde está o valor
-            vt = str(linha[3]*linha[2]) #Operação para obter o valor total
+            vt = str(linha[4]) #Valor total
             #Item que contém os dados que estão vindo do Banco de Dados:
             item = [cli, p, quant, vu, vt]
             #Adição do item ao conjunto de dados:
@@ -212,13 +211,7 @@ def Gerar_Relatorio():
         #Tamanho da tabela:
         tabela.wrapOn(pdf, 400, 100)
         #Posicionamento da tabela:
-        tabela.drawOn(pdf, 30, 380) 
-        
-        #Inserir uma imagem:
-        imagem1 = "C:\\Users\\55849\\Documents\\ProjetoFinal\\Sistema\\imagens\\1.png"
-        imagem2 = "C:\\Users\\55849\\Documents\\ProjetoFinal\\Sistema\\imagens\\2.png"
-        pdf.drawInlineImage(imagem1, 35, 710)
-        pdf.drawInlineImage(imagem2, 450, 710)
+        tabela.drawOn(pdf, 30, 580) 
 
         #Salvando o arquivo:
         pdf.save()
@@ -241,31 +234,31 @@ gerenciadorAba.pack(expand = 1, fill = "both")
 aba1_ClienteLabel = Label(aba1, text = "Nome Completo do Cliente:")
 aba1_ClienteLabel.place(x = 100, y = 80)
 
-aba1_ClienteEntry = Entry(aba1)
+aba1_ClienteEntry = Entry(aba1, width = 30)
 aba1_ClienteEntry.place(x = 100, y = 100)
 
 aba1_PedidoLabel = Label(aba1, text = "Pedido:")
 aba1_PedidoLabel.place(x = 400, y = 80)
 
-aba1_PedidoEntry = Entry(aba1)
+aba1_PedidoEntry = Entry(aba1, width = 30)
 aba1_PedidoEntry.place(x = 400, y = 100)
 
 aba1_QuantidadeLabel = Label(aba1, text = "Quantidade:")
 aba1_QuantidadeLabel.place(x = 100 , y = 180)
 
-aba1_QuantidadeEntry = Entry(aba1)
+aba1_QuantidadeEntry = Entry(aba1, width = 30)
 aba1_QuantidadeEntry.place(x = 100, y = 200)
 
 aba1_ValorLabel = Label(aba1, text = "Valor Unitário:")
 aba1_ValorLabel.place(x = 400 , y = 180)
 
-aba1_ValorEntry = Entry(aba1)
+aba1_ValorEntry = Entry(aba1, width = 30)
 aba1_ValorEntry.place(x = 400 , y = 200)
 
-aba1_CadastrarButton = Button(aba1, width = 16, text = "Cadastrar Pedido", command = Inserir_Dados)
+aba1_CadastrarButton = Button(aba1, width = 26, text = "Cadastrar Pedido", command = Inserir_Dados)
 aba1_CadastrarButton.place(x = 100 , y = 300)
 
-aba1_LimparDados = Button(aba1, width = 16, text = "Limpar Dados", command = Limpar_Dados_Aba1)
+aba1_LimparDados = Button(aba1, width = 26, text = "Limpar Dados", command = Limpar_Dados_Aba1)
 aba1_LimparDados.place(x = 400, y = 300)
 
 #Aba 2 - Visualizar Dados:
@@ -317,10 +310,10 @@ aba3_NovoValorEntry = Entry(aba3, width = 30)
 aba3_NovoValorEntry.place(x = 400, y = 200)
 
 aba3_AtualizarButton = Button(aba3, width = 25, text = "Atualizar Dados", command = Atualizar_Dados)
-aba3_AtualizarButton.place(x = 100, y = 400)
+aba3_AtualizarButton.place(x = 100, y = 300)
 
 aba3_LimparDadosButton = Button(aba3, width = 25, text = "Limpar Dados", command = Limpar_Dados_Aba3)
-aba3_LimparDadosButton.place(x = 400, y = 400)
+aba3_LimparDadosButton.place(x = 400, y = 300)
 
 #Aba 4 - Remover Dados:
 aba4 = ttk.Frame(gerenciadorAba)
@@ -328,11 +321,11 @@ gerenciadorAba.add(aba4, text = "Remover Dados")
 gerenciadorAba.pack(expand = 1, fill = "both")
 
 ## Elementos da Aba 4 ####
-aba4_ClienteLabel = Label(aba4, text = "Nome do Cliente:")
-aba4_ClienteLabel.place(x = 230, y = 180)
+aba4_ClienteLabel = Label(aba4, text = "Nome Completo do Cliente:")
+aba4_ClienteLabel.place(x = 100, y = 180)
 
-aba4_ClienteEntry = Entry(aba4)
-aba4_ClienteEntry.place(x = 340, y = 180)
+aba4_ClienteEntry = Entry(aba4, width = 54)
+aba4_ClienteEntry.place(x = 260, y = 180)
 
 aba4_RemoverButton = Button(aba4, width = 25, text = "Remover Cliente", command = Remover_Dados)
 aba4_RemoverButton.place(x = 100, y = 240)
