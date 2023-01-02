@@ -1,14 +1,14 @@
 <h1 align="center">Projeto Final</h1>
 <p align="center"><i>O seguinte projeto traz um sistema simples que busca atender duas das principais possíveis necessidades do cliente no CT do Queijo, IFRN - Campus Currais Novos.</i></p>
 
-##  Sobre o projeto:
+<h2>Sobre o projeto:</h2>
 
 Necessidade a ser atendida:
 <ul>
 <li>Controle de Pedidos</li>
 </ul>
 
-##  Participantes:
+<h2>Participantes:</h2>
 
 <ul>
 <li>Débora Pereira de Souza (20191214010018)</li>
@@ -17,7 +17,7 @@ Necessidade a ser atendida:
 <li>Maria Isabel de Sousa Avelino (20191214010027)</li>
 </ul>
 
-##  Ferramentas e linguagem de desenvolvimento:
+<h2>Ferramentas e linguagem de desenvolvimento:</h2>
 
 <p display="inline-block">
   <img width="48" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/2048px-Visual_Studio_Code_1.35_icon.svg.png" alt="vscode-logo"/>
