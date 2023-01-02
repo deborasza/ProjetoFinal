@@ -26,12 +26,6 @@ cursor = conexao.cursor()
 from turtle import width 
 width, height = A4
 
-#Rótulo --> Label
-#Entry --> Campo de Texto 
-#Button --> Botão 
-#Text --> área de texto
-#place --> Método para definir um elemento gráfico
-
 #Visualizar Dados
 def Visualizar_Dados():
 
@@ -125,36 +119,35 @@ def Remover_Dados():
     finally:
         Limpar_Dados_Aba4()
 
-#######################################################################################################################################################
 def Gerar_Relatorio():
     try:
         #Endereço onde o arquivo será criado + nome do arquivo
-        end_arq = "C:\\Users\\55849\\Downloads\\relatorio_animes.pdf"
+        end_arq = "C:\\Users\\55849\\Documents\\ProjetoFinal\\Sistema\\Relatório\\relatorio_pedidos.pdf"\
         
         #Criação do arquivo pdf:
         pdf = canvas.Canvas(end_arq, pagesize = A4)
         #Metadados sobre o arquivo:
-        pdf.setTitle('Relatório de Animes')
-        pdf.setAuthor('Débora e Deivid')
-        pdf.setKeywords('Anime, Donghua, Animação, Japão, China')
+        pdf.setTitle('Relatório de Pedidos')
+        pdf.setAuthor('Débora, Deivid, Giovanna e Isabel')
+        pdf.setKeywords('Queijo, CT, Sistema, Python, Cadastro, Pedidos')
         
         ##Escrevendo o conteúdo do arquivo pdf##
         #Definição da fonte e do tamanho da letra:
         pdf.setFont('Times-Bold', 20)
         #Definição de um título para o arquivo pdf:
-        pdf.drawCentredString(width/2, 760, "Animes e Donghuas")
+        pdf.drawCentredString(width/2, 760, "Relatório de Pedidos")
         
         #Definição de um subtítulo para o arquivo pdf:
         pdf.setFont('Times-Roman', 15)
         pdf.setFillColor(colors.brown) #Definição da cor da fonte
-        pdf.drawCentredString(width/2, 730, "Japão, China e suas animações")
+        pdf.drawCentredString(width/2, 730, "Centro de Tecnologia do Queijo - Campus Currais Novos")
         
         #Desenhando uma linha horizontal:
         pdf.line(30, 700, 550, 700) #Coordenadas iniciais e finais da linha
 
         ##Inserção de um parágrafo:##
         #Escrevendo o texto:
-        paragrafo = ['Os emocionantes animes, são as animações produzidas por estúdios do Japão.', 'Uma variação disso seriam os Donghuas, que são justamente as animações produzidas por estúdios da', 'China!!  Ambos com suas particularidades e com uma grande diversidade de gêneros, para todos os gostos.', 'Aqui você irá encontrar as melhores indicações de Animes e Donghuas, como também informações', 'ao seu respeito, personagens que mais nos cativam e muito mais!', ' ', 'Esperamos que possam se sentir estimulados a assistí-los e que, as informações aqui contidas, possam', 'ajudá-los a conhecer um poucos mais essas maravilhosas obras!!'] #As informações dentro das aspas, representa uma linha do arquivo pdf.
+        paragrafo = ['Pedidos realizados e suas devidas informações:'] #As informações dentro das aspas, representa uma linha do arquivo pdf.
 
         #Definindo onde esse texto irá começar:
         text = pdf.beginText(40, 680)
@@ -169,26 +162,23 @@ def Gerar_Relatorio():
 
         #Lista de valores:
         dados = [
-            ['Código do Anime', 'Nome do Anime', 'Temporadas', 'Episódios', 'Personagem Favorito¹', 'Personagem Favorito²'],
+            ['Nome do Cliente', 'Pedido', 'Quantidade', 'Valor Unitário', 'Valor Total'],
         ]
 
         #Definição da consulta SQL que retorna todos os dados da tabela 'animes':
-        sql = 'select * from animes'
+        sql = 'select * from pedidos'
 
         cursor.execute(sql)
         resultado = cursor.fetchall() #Lista de itens que estão no Banco de Dados
         #print(resultado)
         for linha in resultado:
             #print("-------------------------------------------------------------------------------------------------------------------------------------")
-            cod = str(linha[0]) #Coluna onde está o código
-            n = str(linha[1]) #Coluna onde está o nome
-            temp = str(linha[2]) #Coluna onde está as temporadas
-            ep = str(linha[3]) #Coluna onde está os episódios
-            pf1 = str(linha[4]) #Coluna onde está o personagem fav1
-            pf2 = str(linha[5]) #Coluna onde está o personagem fav2
-            #print(f"Código: {cod} - Nome: {n} - Temporadas: {temp} - Episódios: {ep} - Personagem Favorito¹: {pf1} - Personagem Favorito²: {pf2}")
+            cli = str(linha[0]) #Coluna onde está o nome do cliente
+            p = str(linha[1]) #Coluna onde está o pedido
+            quant = str(linha[2]) #Coluna onde está a quantidade
+            vu = str(linha[3]) #Coluna onde está o valor
             #Item que contém os dados que estão vindo do Banco de Dados:
-            item = [cod, n, temp, ep, pf1, pf2]
+            item = [cli, p, quant, vu]
             #Adição do item ao conjunto de dados:
             dados.append(item)
 
@@ -223,8 +213,8 @@ def Gerar_Relatorio():
         tabela.drawOn(pdf, 30, 380) 
         
         #Inserir uma imagem:
-        imagem1 = "C:\\Users\\debor\\OneDrive\\Documentos\\IFRN\\Programação com Acesso a Banco de Dados\\Projeto\\1.jpg"
-        imagem2 = "C:\\Users\\debor\\OneDrive\\Documentos\\IFRN\\Programação com Acesso a Banco de Dados\\Projeto\\2.jpg"
+        imagem1 = "C:\\Users\\55849\\Documents\\ProjetoFinal\\Sistema\\imagens\\IF.png"
+        imagem2 = "C:\\Users\\55849\\Documents\\ProjetoFinal\\Sistema\\imagens\\queijo.png"
         pdf.drawInlineImage(imagem1, 35, 710)
         pdf.drawInlineImage(imagem2, 450, 710)
 
@@ -234,7 +224,6 @@ def Gerar_Relatorio():
         messagebox.showinfo('Sucesso!', 'Relatório gerado com sucesso.')
     except:
         messagebox.showerror('Erro!', 'Não foi possível gerar Relatório.')
-####################################################################################################################################################
 
 janela = Tk() #Janela recebe uma instância de Tk()
 
