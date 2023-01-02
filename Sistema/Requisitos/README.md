@@ -1,5 +1,5 @@
 <h1 align="center">Requisitos</h1>
-<p align="center"><i>Baseado nas necessidades do cliente, aqui temos os requisitos funcionais e não-funcionais do sistema:</i></p>
+<p align="center"><i>Baseado nas necessidades do cliente, aqui temos os requisitos funcionais e não-funcionais propostos para o sistema:</i></p>
 
 <h2>Requisitos Funcionais (RF):</h2>
 <h3>[RF01] Adicionar, alterar e remover pedidos</h3>
@@ -18,9 +18,9 @@
 <p><strong>Descrição:</strong> O sistema deve permitir gerar uma lista de entregas que será usada para o motorista saber quais entregas fazer.</p>
 <p><strong>Prioridade:</strong> Desejável.</p>
 
-<h3>[RF05] Gerar relatório de vendas</h3>
-<p><strong>Descrição:</strong> O sistema deve gerar e guardar um registro de todas as vendas feitas.</p>
-<p><strong>Prioridade:</strong> Opcional.</p>
+<h3>[RF05] Gerar relatório de pedidos</h3>
+<p><strong>Descrição:</strong> O sistema deve armazenar e um registro de todos os pedidos feitos.</p>
+<p><strong>Prioridade:</strong> Desejável.</p>
 
 <h3>[RF06] Aviso de não disponibilidade</h3>
 <p><strong>Descrição:</strong> O sistema deve mostrar os produtos que não estão disponíveis no momento.</p>
@@ -28,7 +28,7 @@
 
 <h3>[RF07] Mensagem Final</h3>
 <p><strong>Descrição:</strong> O sistema deve mostrar, ao final, uma mensagem de "Volte Sempre" para o cliente.</p>
-<p><strong>Prioridade:</strong> Desejável.</p>
+<p><strong>Prioridade:</strong> Opcional.</p>
 
 <h3>[RF08] Opções de pedido</h3>
 <p><strong>Descrição:</strong> O sistema deve oferecer ao cliente um menu, contendo todas as opções de pedido que ele poderá realizar.</p>

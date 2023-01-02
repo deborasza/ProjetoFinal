@@ -6,24 +6,14 @@ Criar diagramas que apresentem o fluxo desses requisitos. Por exemplo, utilizar 
 <h2>Controle de Pedidos</h2>
 <ul>
 <h2>Requisitos funcionais:</h2>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
+<li>Adicionar Pedidos</li>
+<li>Visualizar Pedidos</li>
+<li>Alterar Pedidos</li>
+<li>Remover Pedidos</li>
+<li>Gerar Relatório de Pedidos</li>
 </ul>
 
 <ul>
 <h2>Requisitos não-funcionais:</h2>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
+<li>Controle de Acesso</li>
 </ul>
