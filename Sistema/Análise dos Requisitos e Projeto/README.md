@@ -5,7 +5,7 @@ Criar diagramas que apresentem o fluxo desses requisitos. Por exemplo, utilizar 
 
 <h2>Controle de Pedidos</h2>
 <ul>
-<h2>Requisitos funcionais:</h2>
+<h3>Requisitos funcionais:</h3>
 <li>Adicionar Pedidos</li>
 <li>Visualizar Pedidos</li>
 <li>Alterar Pedidos</li>
@@ -14,6 +14,6 @@ Criar diagramas que apresentem o fluxo desses requisitos. Por exemplo, utilizar 
 </ul>
 
 <ul>
-<h2>Requisitos não-funcionais:</h2>
+<h3>Requisitos não-funcionais:</h3>
 <li>Controle de Acesso</li>
 </ul>
