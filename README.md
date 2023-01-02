@@ -24,6 +24,6 @@ Necessidade a ser atendida:
   <img width="48" src="https://upload.wikimedia.org/wikipedia/commons/archive/c/c3/20220821155028%21Python-logo-notext.svg" alt="python-logo"/>
 </p>
 
-## Referências:
-# [Documentação - Python 3.11.1 documentation](https://docs.python.org/3/)
+<h2>Referências:</h2>
+[Documentação - Python 3.11.1 documentation](https://docs.python.org/3/)
 # [Codificar - O que são Requisitos Funcionais e Requisitos Não Funcionais?](https://codificar.com.br/requisitos-funcionais-nao-funcionais/)
