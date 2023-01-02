@@ -37,7 +37,7 @@ def Visualizar_Dados():
     
     for linha in result:
         texto = texto + f"------------------------------------------------------------------------------ \nNome do Cliente: {str(linha[0])} \nPedido: {str(linha[1])} \nQuantidade: {str(linha[2])} \nValor Unitário: {str(linha[3])} \nValor total: {(linha[3])*(linha[2])} \n------------------------------------------------------------------------------ \n\n" # str - Converte em string
-        #print(f'Nome do Cliente: {linha[0]} - Pedido: {linha[1]} - Quantidade: {linha[2]} - Valor Unitário: {linha[3]}')
+        #print(f'Nome do Cliente: {linha[0]} - Pedido: {linha[1]} - Quantidade: {linha[2]} - Valor Unitário: {linha[3]} - Valor Total: {(linha[3])*(linha[2])}')
 
     aba2_Texto.delete(1.0, 'end') #Deletar informações contidas no campo
     aba2_Texto.insert(END, texto) #Inserir Informações
@@ -67,12 +67,13 @@ def Inserir_Dados():
     cliente = aba1_ClienteEntry.get() #Obtém o nome do cliente
     pedido = aba1_PedidoEntry.get() #Obtém o pedido do cliente
     quantidade = aba1_QuantidadeEntry.get() #Obtém a quantidade de pedidos
-    valor = aba1_ValorEntry.get() #Obtém o valor do pedido
+    valor_unitario = aba1_ValorEntry.get() #Obtém o valor do pedido
+    valor_total = valor_unitario*quantidade
 
-    #print(f"Nome do Cliente: {cliente} - Pedido: {pedido} - Quantidade: {quantidade} - Valor: {valor}")
+    #print(f"Nome do Cliente: {cliente} - Pedido: {pedido} - Quantidade: {quantidade} - Valor Unitário: {valor_unitario} - Valor Total: {valor_total}")
     
     #Construção da consulta SQL
-    sql = f"insert into pedidos values ('{cliente}','{pedido}',{quantidade},{valor})"
+    sql = f"insert into pedidos values ('{cliente}','{pedido}',{quantidade},{valor_unitario}, {valor_total})"
     
     #Procedimento para executar a consulta
     cursor.execute(sql)
@@ -177,8 +178,9 @@ def Gerar_Relatorio():
             p = str(linha[1]) #Coluna onde está o pedido
             quant = str(linha[2]) #Coluna onde está a quantidade
             vu = str(linha[3]) #Coluna onde está o valor
+            vt = str(linha[3]*linha[2]) #Operação para obter o valor total
             #Item que contém os dados que estão vindo do Banco de Dados:
-            item = [cli, p, quant, vu]
+            item = [cli, p, quant, vu, vt]
             #Adição do item ao conjunto de dados:
             dados.append(item)
 
@@ -213,8 +215,8 @@ def Gerar_Relatorio():
         tabela.drawOn(pdf, 30, 380) 
         
         #Inserir uma imagem:
-        imagem1 = "C:\\Users\\55849\\Documents\\ProjetoFinal\\Sistema\\imagens\\IF.png"
-        imagem2 = "C:\\Users\\55849\\Documents\\ProjetoFinal\\Sistema\\imagens\\queijo.png"
+        imagem1 = "C:\\Users\\55849\\Documents\\ProjetoFinal\\Sistema\\imagens\\1.png"
+        imagem2 = "C:\\Users\\55849\\Documents\\ProjetoFinal\\Sistema\\imagens\\2.png"
         pdf.drawInlineImage(imagem1, 35, 710)
         pdf.drawInlineImage(imagem2, 450, 710)
 
@@ -236,7 +238,7 @@ gerenciadorAba.add(aba1, text = "Inserir Dados")
 gerenciadorAba.pack(expand = 1, fill = "both")
 
 ## Elementos da Aba 1 #
-aba1_ClienteLabel = Label(aba1, text = "Nome do Cliente:")
+aba1_ClienteLabel = Label(aba1, text = "Nome Completo do Cliente:")
 aba1_ClienteLabel.place(x = 100, y = 80)
 
 aba1_ClienteEntry = Entry(aba1)
