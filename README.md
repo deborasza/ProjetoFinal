@@ -26,5 +26,5 @@ Necessidade a ser atendida:
 
 <h2>Referências:</h2>
 
-<p>[Documentação - Python 3.11.1 documentation](https://docs.python.org/3/)</p>
-<p>[Codificar - O que são Requisitos Funcionais e Requisitos Não Funcionais?](https://codificar.com.br/requisitos-funcionais-nao-funcionais/)</p>
+[Documentação - Python 3.11.1 documentation](https://docs.python.org/3/)
+\n[Codificar - O que são Requisitos Funcionais e Requisitos Não Funcionais?](https://codificar.com.br/requisitos-funcionais-nao-funcionais/)
