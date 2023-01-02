@@ -6,7 +6,7 @@ class PedidosBean:
         self.__quantidade = None #Atributo Privado
         self.__valor = None #Atributo Privado
     
-    #Retorna o nome do cliente, pois o nome do cliente foi definido como privado:
+    #Retorna o nome do cliente, pois ele foi definido como privado:
     def getCliente(self):
         return self.__cliente
 
