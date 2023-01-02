@@ -4,7 +4,7 @@
 <li>Controle de Inventário</li>
 <li>Controle de Acesso de Funcionários</li>
 <li>Controle de Máquinas e Equipamentos</li>
-<li>Controle de Pedidos</li>
+<li>Controle de Pedido</li>
 <li>Central de Ajuda e Feedback</li>
 <li>Supervisório do Processo de Pasteurização</li>
 <li>Supervisório da Produção da Iogurteira</li>

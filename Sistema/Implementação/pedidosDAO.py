@@ -1,4 +1,4 @@
-#DAO (Data Access Object
+#DAO (Data Access Object)
 
 import psycopg2
 

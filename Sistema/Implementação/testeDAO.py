@@ -5,7 +5,7 @@ from pedidosDAO import PedidosDAO
 p = PedidosBean()
 p.setCliente('Débora')
 p.setPedido('Doritos')
-p.setQuantidade(4)
+p.setQuantidade(5)
 p.setValor(8)
 
 pedidos_dao = PedidosDAO()
