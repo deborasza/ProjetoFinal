@@ -25,42 +25,6 @@ cursor = conexao.cursor()
 
 from turtle import width 
 width, height = A4
-
-#Visualizar Dados
-def Visualizar_Dados():
-
-    sql = "select * from pedidos" #Consulta SQL de retorno de dados
-    cursor.execute(sql)
-
-    result = cursor.fetchall()
-    texto = "" #Variável auxiliar
-    
-    for linha in result:
-        texto = texto + f"------------------------------------------------------------------------------ \nNome do Cliente: {str(linha[0])} \nPedido: {str(linha[1])} \nQuantidade: {str(linha[2])} \nValor Unitário: {str(linha[3])} \nValor total: {str(linha[4])} \n------------------------------------------------------------------------------ \n\n" # str - Converte em string
-        #print(f'Nome do Cliente: {linha[0]} - Pedido: {linha[1]} - Quantidade: {linha[2]} - Valor Unitário: {linha[3]} - Valor Total: {(linha[4]}')
-
-    aba2_Texto.delete(1.0, 'end') #Deletar informações contidas no campo
-    aba2_Texto.insert(END, texto) #Inserir Informações
-
-#Atualizar Dados
-def Atualizar_Dados():
-    #Procedimento para captura dos dados digitados pelo usuário
-    cliente = aba3_ClienteEntry.get()
-    novo_pedido = aba3_NovoPedidoEntry.get()
-    nova_quantidade = aba3_NovaQuantidadeEntry.get()
-    novo_valor = aba3_NovoValorEntry.get()
-    novo_valor_total = (int(novo_valor))*(int(nova_quantidade))
-
-    #print(f"Nome do Cliente: {cliente} - Novo pedido: {novo_pedido} - Nova Quantidade: {nova_quantidade} - Novo Valor Unitário: {novo_valor}")
-
-    sql = f"update pedidos set pedido = '{novo_pedido}', quantidade = {nova_quantidade}, valor_unitario = {novo_valor}, valor_total = {novo_valor_total} where cliente = '{cliente}'"
-
-    #print(sql)
-
-    cursor.execute(sql)
-    conexao.commit() 
-
-    Limpar_Dados_Aba3()
     
 #Inserir dados no Banco de Dados - PostgreSQL
 def Inserir_Dados():
@@ -70,9 +34,13 @@ def Inserir_Dados():
     quantidade = aba1_QuantidadeEntry.get() #Obtém a quantidade de pedidos
     valor_unitario = aba1_ValorEntry.get() #Obtém o valor do pedido
     valor_total = (int(valor_unitario))*(int(quantidade))
-    
+    rua = aba1_RuaEntry.get() #Obtém o endereço para entrega do pedido
+    n_casa = aba1_NumeroCasaEntry.get() #Obtém o número da casa do cliente
+    bairro = aba1_BairroEntry.get() #Obtém o nome do bairro do cliente
+    cep = aba1_CEPEntry.get() #Obtém o CEP do endereço para entrega do pedido
+
     #Construção da consulta SQL
-    sql = f"insert into pedidos values ('{cliente}','{pedido}',{quantidade},{valor_unitario},{valor_total})"
+    sql = f"insert into pedidos values ('{cliente}','{pedido}',{quantidade},{valor_unitario},{valor_total},'{rua}',{n_casa},'{bairro}',{cep})"
     
     #Procedimento para executar a consulta
     cursor.execute(sql)
@@ -87,6 +55,48 @@ def Limpar_Dados_Aba1():
     aba1_PedidoEntry.delete(0, 'end')
     aba1_QuantidadeEntry.delete(0, 'end')
     aba1_ValorEntry.delete(0, 'end')
+    aba1_RuaEntry.delete(0, 'end')
+    aba1_NumeroCasaEntry.delete(0, 'end')
+    aba1_BairroEntry.delete(0, 'end')
+    aba1_CEPEntry.delete(0, 'end')
+
+#Visualizar Dados
+def Visualizar_Dados():
+
+    sql = "select * from pedidos" #Consulta SQL de retorno de dados
+    cursor.execute(sql)
+
+    result = cursor.fetchall()
+    texto = "" #Variável auxiliar
+    
+    for linha in result:
+        texto = texto + f"------------------------------------------------------------------------------ \nNome do Cliente: {str(linha[0])} \nPedido: {str(linha[1])} \nQuantidade: {str(linha[2])} \nValor Unitário: {str(linha[3])} \nValor total: {str(linha[4])} \nEndereço para Entrega: {str(linha[5])}, {str(linha[6])}, {str(linha[7])}, {str(linha[8])} \n------------------------------------------------------------------------------ \n\n" # str - Converte em string
+        #print(f'Nome do Cliente: {linha[0]} - Pedido: {linha[1]} - Quantidade: {linha[2]} - Valor Unitário: {linha[3]} - Valor Total: {(linha[4]} - Endereço para Entrega: ])}, {str(linha[7])}, {str(linha[8])}')
+
+    aba2_Texto.delete(1.0, 'end') #Deletar informações contidas no campo
+    aba2_Texto.insert(END, texto) #Inserir Informações
+
+#Atualizar Dados
+def Atualizar_Dados():
+    #Procedimento para captura dos dados digitados pelo usuário
+    cliente = aba3_ClienteEntry.get()
+    novo_pedido = aba3_NovoPedidoEntry.get()
+    nova_quantidade = aba3_NovaQuantidadeEntry.get()
+    novo_valor = aba3_NovoValorEntry.get()
+    novo_valor_total = (int(novo_valor))*(int(nova_quantidade))
+    nova_rua = aba3_NovaRuaEntry.get()
+    novo_numero = aba3_NovoNumeroEntry.get()
+    novo_bairro = aba3_NovoBairroEntry.get()
+    novo_cep = aba3_NovoCEPEntry.get()
+
+    sql = f"update pedidos set pedido = '{novo_pedido}', quantidade = {nova_quantidade}, valor_unitario = {novo_valor}, valor_total = {novo_valor_total}, rua = '{nova_rua}', n_casa = {novo_numero}, bairro = '{novo_bairro}', cep = {novo_cep} where cliente = '{cliente}'"
+
+    #print(sql)
+
+    cursor.execute(sql)
+    conexao.commit() 
+
+    Limpar_Dados_Aba3()
 
 #Limpar Dados da Aba 3:
 def Limpar_Dados_Aba3():
@@ -94,6 +104,10 @@ def Limpar_Dados_Aba3():
     aba3_NovoPedidoEntry.delete(0, 'end')
     aba3_NovaQuantidadeEntry.delete(0, 'end')
     aba3_NovoValorEntry.delete(0, 'end')
+    aba3_NovaRuaEntry.delete(0, 'end')
+    aba3_NovoNumeroEntry.delete(0, 'end')
+    aba3_NovoBairroEntry.delete(0, 'end')
+    aba3_NovoCEPEntry.delete(0, 'end')
 
 #Limpar Dados da Aba 4
 def Limpar_Dados_Aba4():
@@ -147,7 +161,7 @@ def Gerar_Relatorio():
 
         ##Inserção de um parágrafo:##
         #Escrevendo o texto:
-        paragrafo = ['Pedidos realizados e suas devidas informações:'] #As informações dentro das aspas, representa uma linha do arquivo pdf.
+        paragrafo = ['Tabela de pedidos realizados e suas devidas informações:'] #As informações dentro das aspas, representa uma linha do arquivo pdf.
 
         #Definindo onde esse texto irá começar:
         text = pdf.beginText(40, 685)
@@ -162,7 +176,7 @@ def Gerar_Relatorio():
 
         #Lista de valores:
         dados = [
-            ['Nome do Cliente', 'Pedido', 'Quantidade', 'Valor Unitário', 'Valor Total'],
+            ['Nome do Cliente', 'Pedido', 'Quantidade', 'Valor Unitário', 'Valor Total', 'Rua', 'Nº da Casa', 'Bairro', 'CEP'],
         ]
 
         #Definição da consulta SQL que retorna todos os dados da tabela 'animes':
@@ -177,9 +191,13 @@ def Gerar_Relatorio():
             p = str(linha[1]) #Coluna onde está o pedido
             quant = str(linha[2]) #Coluna onde está a quantidade
             vu = str(linha[3]) #Coluna onde está o valor
-            vt = str(linha[4]) #Valor total
+            vt = str(linha[4]) #Coluna onde está o valor total
+            rua = str(linha[5]) #Coluna onde está a rua
+            n_casa = str(linha[6]) #Coluna onde está o número da casa
+            bairro = str(linha[7]) #Coluna onde está o bairro 
+            cep = str(linha[8]) #Coluna onde está o CEP
             #Item que contém os dados que estão vindo do Banco de Dados:
-            item = [cli, p, quant, vu, vt]
+            item = [cli, p, quant, vu, vt, rua, n_casa, bairro, cep]
             #Adição do item ao conjunto de dados:
             dados.append(item)
 
