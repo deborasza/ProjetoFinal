@@ -3,7 +3,7 @@
 
 <h2>Diagrama de Casos de Uso</h2>
 
-![ProjetoFinal drawio](https://user-images.githubusercontent.com/106175075/210436431-a8b975e0-2e08-47b9-870f-91ac47206238.png)
+<p align="center"><i>![ProjetoFinal drawio](https://user-images.githubusercontent.com/106175075/210436431-a8b975e0-2e08-47b9-870f-91ac47206238.png)</i></p>
 
 <h2>Controle de Pedidos</h2>
 <h3>Requisitos funcionais:</h3>
