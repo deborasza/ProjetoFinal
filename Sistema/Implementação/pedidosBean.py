@@ -26,5 +26,3 @@ class PedidosBean:
       self.__quantidade = quant
     def setValor(self, val):
       self.__valor = val
-
-      
