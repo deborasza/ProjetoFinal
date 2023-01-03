@@ -3,6 +3,8 @@
 
 //** Diagrama
 
+![ProjetoFinal drawio](https://user-images.githubusercontent.com/106175075/210436431-a8b975e0-2e08-47b9-870f-91ac47206238.png)
+
 <h2>Controle de Pedidos</h2>
 <h3>Requisitos funcionais:</h3>
 <ul>
