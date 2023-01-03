@@ -27,7 +27,7 @@
 <p><strong>Prioridade:</strong> Opcional.</p>
 
 <h3>[RF07] Mensagem Final</h3>
-<p><strong>Descrição:</strong> O sistema deve mostrar, ao final, uma mensagem de "Volte Sempre" para o cliente.</p>
+<p><strong>Descrição:</strong> O sistema deve mostrar, ao final do pedido, uma mensagem de "Volte Sempre" para o cliente.</p>
 <p><strong>Prioridade:</strong> Opcional.</p>
 
 <h3>[RF08] Opções de pedido</h3>
