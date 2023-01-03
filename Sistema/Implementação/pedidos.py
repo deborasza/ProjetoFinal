@@ -149,22 +149,22 @@ def Gerar_Relatorio():
         #Definição da fonte e do tamanho da letra:
         pdf.setFont('Times-Bold', 20)
         #Definição de um título para o arquivo pdf:
-        pdf.drawCentredString(width/2, 750, "Relatório de Pedidos")
+        pdf.drawCentredString(width/2, 735, "Relatório de Pedidos")
         
         #Definição de um subtítulo para o arquivo pdf:
         pdf.setFont('Times-Roman', 15)
         pdf.setFillColor(colors.brown) #Definição da cor da fonte
-        pdf.drawCentredString(width/2, 725, "Centro de Tecnologia do Queijo - Campus Currais Novos")
+        pdf.drawCentredString(width/2, 710, "Centro de Tecnologia do Queijo - Campus Currais Novos")
         
         #Desenhando uma linha horizontal:
-        pdf.line(30, 705, 550, 705) #Coordenadas iniciais e finais da linha
+        pdf.line(30, 695, 550, 695) #Coordenadas iniciais e finais da linha
 
         ##Inserção de um parágrafo:##
         #Escrevendo o texto:
         paragrafo = ['Tabela de pedidos realizados e suas devidas informações:'] #As informações dentro das aspas, representa uma linha do arquivo pdf.
 
         #Definindo onde esse texto irá começar:
-        text = pdf.beginText(40, 685)
+        text = pdf.beginText(40, 675)
 
         #Definindo o tipo da fonte:
         text.setFont('Times-Roman', 12)
@@ -176,11 +176,11 @@ def Gerar_Relatorio():
 
         #Lista de valores:
         dados = [
-            ['Nome do Cliente', 'Pedido', 'Quantidade', 'Valor Unitário', 'Valor Total', 'Rua', 'Nº da Casa', 'Bairro', 'CEP'],
+            ['Nome do Cliente', 'Pedido', 'Quantidade', 'Valor Unitário', 'Valor Total'],
         ]
 
         #Definição da consulta SQL que retorna todos os dados da tabela 'animes':
-        sql = 'select * from pedidos'
+        sql = 'select cliente, pedido, quantidade, valor_unitario, valor_total from pedidos'
 
         cursor.execute(sql)
         resultado = cursor.fetchall() #Lista de itens que estão no Banco de Dados
@@ -192,12 +192,8 @@ def Gerar_Relatorio():
             quant = str(linha[2]) #Coluna onde está a quantidade
             vu = str(linha[3]) #Coluna onde está o valor
             vt = str(linha[4]) #Coluna onde está o valor total
-            rua = str(linha[5]) #Coluna onde está a rua
-            n_casa = str(linha[6]) #Coluna onde está o número da casa
-            bairro = str(linha[7]) #Coluna onde está o bairro 
-            cep = str(linha[8]) #Coluna onde está o CEP
             #Item que contém os dados que estão vindo do Banco de Dados:
-            item = [cli, p, quant, vu, vt, rua, n_casa, bairro, cep]
+            item = [cli, p, quant, vu, vt]
             #Adição do item ao conjunto de dados:
             dados.append(item)
 
@@ -235,27 +231,27 @@ def Gerar_Relatorio():
         imagem1 = "C:\\Users\\55849\\Documents\\ProjetoFinal\\Sistema\\Imagens\\1.png"
         imagem2 = "C:\\Users\\55849\\Documents\\ProjetoFinal\\Sistema\\Imagens\\2.jpg"
         imagem3 = "C:\\Users\\55849\\Documents\\ProjetoFinal\\Sistema\\Imagens\\3.jpeg"
-        pdf.drawInlineImage(imagem1, 240, 780)
-        pdf.drawInlineImage(imagem2, width/2, 790)
-        pdf.drawInlineImage(imagem3, 330, 780)
+        pdf.drawInlineImage(imagem1, 240, 760)
+        pdf.drawInlineImage(imagem2, width/2, 770)
+        pdf.drawInlineImage(imagem3, 330, 760)
 
         #Salvando o arquivo:
         pdf.save()
 
+        #Exibindo caixa de mensagem:
         messagebox.showinfo('Sucesso!', 'Relatório gerado com sucesso.')
     except:
         messagebox.showerror('Erro!', 'Não foi possível gerar Relatório.')
 
-###########################################################################################################
-def Gerar_Lista_Motorista():
+def Gerar_ListaDeEntrega():
     try:
         #Endereço onde o arquivo será criado + nome do arquivo
-        end_arq = "C:\\Users\\55849\\Documents\\ProjetoFinal\\Sistema\\Relatório\\relatorio_pedidos.pdf"
+        end_arq = "C:\\Users\\55849\\Documents\\ProjetoFinal\\Sistema\\Lista de Entrega\\lista_entrega.pdf"
         
         #Criação do arquivo pdf:
         pdf = canvas.Canvas(end_arq, pagesize = A4)
         #Metadados sobre o arquivo:
-        pdf.setTitle('Relatório de Pedidos')
+        pdf.setTitle('Lista de Entrega para Motorista')
         pdf.setAuthor('Débora, Deivid, Giovanna e Isabel')
         pdf.setKeywords('Queijo, CT, Sistema, Python, Cadastro, Pedidos')
         
@@ -263,19 +259,19 @@ def Gerar_Lista_Motorista():
         #Definição da fonte e do tamanho da letra:
         pdf.setFont('Times-Bold', 20)
         #Definição de um título para o arquivo pdf:
-        pdf.drawCentredString(width/2, 750, "Relatório de Pedidos")
+        pdf.drawCentredString(width/2, 750, "Lista de Entrega")
         
         #Definição de um subtítulo para o arquivo pdf:
         pdf.setFont('Times-Roman', 15)
         pdf.setFillColor(colors.brown) #Definição da cor da fonte
-        pdf.drawCentredString(width/2, 725, "Centro de Tecnologia do Queijo - Campus Currais Novos")
+        pdf.drawCentredString(width/2, 725, "CT do Queijo, IFRN - Campus Currais Novos")
         
         #Desenhando uma linha horizontal:
         pdf.line(30, 705, 550, 705) #Coordenadas iniciais e finais da linha
 
         ##Inserção de um parágrafo:##
         #Escrevendo o texto:
-        paragrafo = ['Tabela de pedidos realizados e suas devidas informações:'] #As informações dentro das aspas, representa uma linha do arquivo pdf.
+        paragrafo = ['Tabela de endereços para entrega de pedidos:'] #As informações dentro das aspas, representa uma linha do arquivo pdf.
 
         #Definindo onde esse texto irá começar:
         text = pdf.beginText(40, 685)
@@ -290,11 +286,11 @@ def Gerar_Lista_Motorista():
 
         #Lista de valores:
         dados = [
-            ['Nome do Cliente', 'Pedido', 'Quantidade', 'Valor Unitário', 'Valor Total', 'Rua', 'Nº da Casa', 'Bairro', 'CEP'],
+            ['Nome do Cliente', 'Pedido', 'Rua', 'Nº da Casa', 'Bairro', 'CEP'],
         ]
 
         #Definição da consulta SQL que retorna todos os dados da tabela 'animes':
-        sql = 'select * from pedidos'
+        sql = 'select cliente, pedido, quantidade, rua, n_casa, bairro, cep from pedidos'
 
         cursor.execute(sql)
         resultado = cursor.fetchall() #Lista de itens que estão no Banco de Dados
@@ -304,14 +300,12 @@ def Gerar_Lista_Motorista():
             cli = str(linha[0]) #Coluna onde está o nome do cliente
             p = str(linha[1]) #Coluna onde está o pedido
             quant = str(linha[2]) #Coluna onde está a quantidade
-            vu = str(linha[3]) #Coluna onde está o valor
-            vt = str(linha[4]) #Coluna onde está o valor total
-            rua = str(linha[5]) #Coluna onde está a rua
-            n_casa = str(linha[6]) #Coluna onde está o número da casa
-            bairro = str(linha[7]) #Coluna onde está o bairro 
-            cep = str(linha[8]) #Coluna onde está o CEP
+            rua = str(linha[3]) #Coluna onde está a rua
+            n_casa = str(linha[4]) #Coluna onde está o número da casa
+            bairro = str(linha[5]) #Coluna onde está o bairro 
+            cep = str(linha[6]) #Coluna onde está o CEP
             #Item que contém os dados que estão vindo do Banco de Dados:
-            item = [cli, p, quant, vu, vt, rua, n_casa, bairro, cep]
+            item = [cli, p, quant, rua, n_casa, bairro, cep]
             #Adição do item ao conjunto de dados:
             dados.append(item)
 
@@ -356,10 +350,10 @@ def Gerar_Lista_Motorista():
         #Salvando o arquivo:
         pdf.save()
 
-        messagebox.showinfo('Sucesso!', 'Relatório gerado com sucesso.')
+        #Exibindo caixa de mensagem
+        messagebox.showinfo('Sucesso!', 'Lista gerada com sucesso.')
     except:
-        messagebox.showerror('Erro!', 'Não foi possível gerar Relatório.')
-###########################################################################################################
+        messagebox.showerror('Erro!', 'Não foi possível gerar Lista.')
 
 janela = Tk() #Janela recebe uma instância de Tk()
 
@@ -436,10 +430,13 @@ aba2_TextoLabel = Label(aba2 , text = "Pedidos Cadastrados:")
 aba2_TextoLabel.place(x = 100 , y = 80)
 
 aba2_VisualizarButton = Button(aba2, width = 20, text = "Visualizar Dados", command = Visualizar_Dados)
-aba2_VisualizarButton.place(x = 300, y = 70)
+aba2_VisualizarButton.place(x = 230, y = 70)
 
 aba2_RelatorioButton = Button(aba2, width = 20, text = "Gerar Relatório", command = Gerar_Relatorio)
-aba2_RelatorioButton.place(x = 500, y = 70)
+aba2_RelatorioButton.place(x = 400, y = 70)
+
+aba2_ListaButton = Button(aba2, width = 20, text = "Gerar Lista de Entrega", command = Gerar_ListaDeEntrega)
+aba2_ListaButton.place(x = 570, y = 70)
 
 aba2_Texto = Text(aba2)
 aba2_Texto.place(x = 100 , y = 120)
