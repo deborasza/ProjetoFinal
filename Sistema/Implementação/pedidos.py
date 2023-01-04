@@ -237,7 +237,7 @@ def Gerar_Relatorio():
         #Tamanho da tabela:
         tabela.wrapOn(pdf, 400, 100)
         #Posicionamento da tabela:
-        tabela.drawOn(pdf, 30, 575) 
+        tabela.drawOn(pdf, 35, 575) 
 
         #Inserir uma imagem:
         imagem1 = "C:\\Users\\55849\\Documents\\ProjetoFinal\\Sistema\\Imagens\\1.png"
@@ -271,22 +271,22 @@ def Gerar_ListaDeEntrega():
         #Definição da fonte e do tamanho da letra:
         pdf.setFont('Times-Bold', 20)
         #Definição de um título para o arquivo pdf:
-        pdf.drawCentredString(width/2, 750, "Lista de Entrega")
+        pdf.drawCentredString(width/2, 735, "Lista de Entrega")
         
         #Definição de um subtítulo para o arquivo pdf:
         pdf.setFont('Times-Roman', 15)
         pdf.setFillColor(colors.brown) #Definição da cor da fonte
-        pdf.drawCentredString(width/2, 725, "CT do Queijo, IFRN - Campus Currais Novos")
+        pdf.drawCentredString(width/2, 710, "CT do Queijo, IFRN - Campus Currais Novos")
         
         #Desenhando uma linha horizontal:
-        pdf.line(30, 705, 550, 705) #Coordenadas iniciais e finais da linha
+        pdf.line(30, 695, 550, 695) #Coordenadas iniciais e finais da linha
 
         ##Inserção de um parágrafo:##
         #Escrevendo o texto:
         paragrafo = ['Tabela de endereços para entrega de pedidos:'] #As informações dentro das aspas, representa uma linha do arquivo pdf.
 
         #Definindo onde esse texto irá começar:
-        text = pdf.beginText(40, 685)
+        text = pdf.beginText(40, 675)
 
         #Definindo o tipo da fonte:
         text.setFont('Times-Roman', 12)
@@ -347,15 +347,15 @@ def Gerar_ListaDeEntrega():
         #Tamanho da tabela:
         tabela.wrapOn(pdf, 400, 100)
         #Posicionamento da tabela:
-        tabela.drawOn(pdf, 30, 585) 
+        tabela.drawOn(pdf, 70, 570) 
 
         #Inserir uma imagem:
         imagem1 = "C:\\Users\\55849\\Documents\\ProjetoFinal\\Sistema\\Imagens\\1.png"
         imagem2 = "C:\\Users\\55849\\Documents\\ProjetoFinal\\Sistema\\Imagens\\2.jpg"
         imagem3 = "C:\\Users\\55849\\Documents\\ProjetoFinal\\Sistema\\Imagens\\3.jpeg"
-        pdf.drawInlineImage(imagem1, 240, 780)
-        pdf.drawInlineImage(imagem2, width/2, 790)
-        pdf.drawInlineImage(imagem3, 330, 780)
+        pdf.drawInlineImage(imagem1, 240, 760)
+        pdf.drawInlineImage(imagem2, width/2, 770)
+        pdf.drawInlineImage(imagem3, 330, 760)
 
         #Salvando o arquivo:
         pdf.save()

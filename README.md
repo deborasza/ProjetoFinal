@@ -26,6 +26,8 @@
 
 <h2>Referências:</h2>
 
-[Documentação - Python 3.11.1 documentation](https://docs.python.org/3/)
+[Documentação - Python 3.11.1 Documentation](https://docs.python.org/3/)
+<br>
+[Documentação - PostgreSQL 15.1 Documentation](https://www.postgresql.org/docs/current/index.html)
 <br>
 [Codificar - O que são Requisitos Funcionais e Requisitos Não Funcionais?](https://codificar.com.br/requisitos-funcionais-nao-funcionais/)
