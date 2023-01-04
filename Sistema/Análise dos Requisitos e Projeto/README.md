@@ -6,7 +6,7 @@
 ![ProjetoFinal drawio](https://user-images.githubusercontent.com/106175075/210436431-a8b975e0-2e08-47b9-870f-91ac47206238.png)
 
 <h2>Controle de Pedidos</h2>
-<h3>Requisitos funcionais:</h3>
+<h3>Funcionalidades:</h3>
 <ul>
 <li>Adicionar Pedidos</li>
 <li>Visualizar Pedidos</li>
@@ -14,5 +14,5 @@
 <li>Remover Pedidos</li>
 <li>Gerar Relatório de Pedidos</li>
 <li>Gerar Lista de Entrega para o Motorista</li>
-<li></li>
+<li>Exibir Mensagem Final</li>
 </ul>
