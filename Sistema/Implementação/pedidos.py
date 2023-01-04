@@ -28,26 +28,32 @@ width, height = A4
     
 #Inserir dados no Banco de Dados - PostgreSQL
 def Inserir_Dados():
-    #Obter os dados no campo da aplicação:
-    cliente = aba1_ClienteEntry.get() #Obtém o nome do cliente
-    pedido = aba1_PedidoEntry.get() #Obtém o pedido do cliente
-    quantidade = aba1_QuantidadeEntry.get() #Obtém a quantidade de pedidos
-    valor_unitario = aba1_ValorEntry.get() #Obtém o valor do pedido
-    valor_total = (int(valor_unitario))*(int(quantidade))
-    rua = aba1_RuaEntry.get() #Obtém o endereço para entrega do pedido
-    n_casa = aba1_NumeroCasaEntry.get() #Obtém o número da casa do cliente
-    bairro = aba1_BairroEntry.get() #Obtém o nome do bairro do cliente
-    cep = aba1_CEPEntry.get() #Obtém o CEP do endereço para entrega do pedido
+    try:
+        #Obter os dados no campo da aplicação:
+        cliente = aba1_ClienteEntry.get() #Obtém o nome do cliente
+        pedido = aba1_PedidoEntry.get() #Obtém o pedido do cliente
+        quantidade = aba1_QuantidadeEntry.get() #Obtém a quantidade de pedidos
+        valor_unitario = aba1_ValorEntry.get() #Obtém o valor do pedido
+        valor_total = (int(valor_unitario))*(int(quantidade))
+        rua = aba1_RuaEntry.get() #Obtém o endereço para entrega do pedido
+        n_casa = aba1_NumeroCasaEntry.get() #Obtém o número da casa do cliente
+        bairro = aba1_BairroEntry.get() #Obtém o nome do bairro do cliente
+        cep = aba1_CEPEntry.get() #Obtém o CEP do endereço para entrega do pedido
 
-    #Construção da consulta SQL
-    sql = f"insert into pedidos values ('{cliente}','{pedido}',{quantidade},{valor_unitario},{valor_total},'{rua}',{n_casa},'{bairro}',{cep})"
-    
-    #Procedimento para executar a consulta
-    cursor.execute(sql)
-    conexao.commit()
+        #Construção da consulta SQL
+        sql = f"insert into pedidos values ('{cliente}','{pedido}',{quantidade},{valor_unitario},{valor_total},'{rua}',{n_casa},'{bairro}',{cep})"
+        
+        #Procedimento para executar a consulta
+        cursor.execute(sql)
+        conexao.commit()
 
-    #Limpar dados da aba1
-    Limpar_Dados_Aba1()
+        #Limpar dados da aba1
+        Limpar_Dados_Aba1()
+
+        #Exibir mensagem final:
+        messagebox.showinfo('Pedido realizado!', 'Volte sempre!! :)')
+    except:
+        messagebox.showerror('Erro!', 'Não foi possível concluir pedido.')
 
 #Limpar dados da Aba 1:
 def Limpar_Dados_Aba1():
@@ -78,25 +84,31 @@ def Visualizar_Dados():
 
 #Atualizar Dados
 def Atualizar_Dados():
-    #Procedimento para captura dos dados digitados pelo usuário
-    cliente = aba3_ClienteEntry.get()
-    novo_pedido = aba3_NovoPedidoEntry.get()
-    nova_quantidade = aba3_NovaQuantidadeEntry.get()
-    novo_valor = aba3_NovoValorEntry.get()
-    novo_valor_total = (int(novo_valor))*(int(nova_quantidade))
-    nova_rua = aba3_NovaRuaEntry.get()
-    novo_numero = aba3_NovoNumeroEntry.get()
-    novo_bairro = aba3_NovoBairroEntry.get()
-    novo_cep = aba3_NovoCEPEntry.get()
+    try:
+        #Procedimento para captura dos dados digitados pelo usuário
+        cliente = aba3_ClienteEntry.get()
+        novo_pedido = aba3_NovoPedidoEntry.get()
+        nova_quantidade = aba3_NovaQuantidadeEntry.get()
+        novo_valor = aba3_NovoValorEntry.get()
+        novo_valor_total = (int(novo_valor))*(int(nova_quantidade))
+        nova_rua = aba3_NovaRuaEntry.get()
+        novo_numero = aba3_NovoNumeroEntry.get()
+        novo_bairro = aba3_NovoBairroEntry.get()
+        novo_cep = aba3_NovoCEPEntry.get()
 
-    sql = f"update pedidos set pedido = '{novo_pedido}', quantidade = {nova_quantidade}, valor_unitario = {novo_valor}, valor_total = {novo_valor_total}, rua = '{nova_rua}', n_casa = {novo_numero}, bairro = '{novo_bairro}', cep = {novo_cep} where cliente = '{cliente}'"
+        sql = f"update pedidos set pedido = '{novo_pedido}', quantidade = {nova_quantidade}, valor_unitario = {novo_valor}, valor_total = {novo_valor_total}, rua = '{nova_rua}', n_casa = {novo_numero}, bairro = '{novo_bairro}', cep = {novo_cep} where cliente = '{cliente}'"
 
-    #print(sql)
+        #print(sql)
 
-    cursor.execute(sql)
-    conexao.commit() 
+        cursor.execute(sql)
+        conexao.commit() 
 
-    Limpar_Dados_Aba3()
+        Limpar_Dados_Aba3()
+
+        #Exibir mensagem final:
+        messagebox.showinfo('Sucesso!', 'Seus dados foram atualizados.')
+    except:
+        messagebox.showerror('Erro!', 'Não foi possível atualizar dados.')
 
 #Limpar Dados da Aba 3:
 def Limpar_Dados_Aba3():
@@ -124,12 +136,12 @@ def Remover_Dados():
         cursor.execute(sql)
         conexao.commit()
         #Mensagem mostrada para o usuário, caso a operação funcione:
-        messagebox.showinfo('Sucesso!', 'Operação realizada com sucesso.')
+        messagebox.showinfo('Sucesso!', 'Cliente removido (a).')
     except:
         conexao.rollback()
         traceback.print_exc()
         #Mensagem mostrada para o usuário, caso a operação dê erro:
-        messagebox.showerror('Erro!', 'Operação mal sucedida!')
+        messagebox.showerror('Erro!', 'Não foi possível remover cliente.')
     finally:
         Limpar_Dados_Aba4()
 
@@ -225,7 +237,7 @@ def Gerar_Relatorio():
         #Tamanho da tabela:
         tabela.wrapOn(pdf, 400, 100)
         #Posicionamento da tabela:
-        tabela.drawOn(pdf, 30, 585) 
+        tabela.drawOn(pdf, 30, 575) 
 
         #Inserir uma imagem:
         imagem1 = "C:\\Users\\55849\\Documents\\ProjetoFinal\\Sistema\\Imagens\\1.png"
@@ -286,11 +298,11 @@ def Gerar_ListaDeEntrega():
 
         #Lista de valores:
         dados = [
-            ['Nome do Cliente', 'Pedido', 'Rua', 'Nº da Casa', 'Bairro', 'CEP'],
+            ['Nome do Cliente', 'Rua', 'Nº da Casa', 'Bairro', 'CEP'],
         ]
 
         #Definição da consulta SQL que retorna todos os dados da tabela 'animes':
-        sql = 'select cliente, pedido, quantidade, rua, n_casa, bairro, cep from pedidos'
+        sql = 'select cliente, rua, n_casa, bairro, cep from pedidos'
 
         cursor.execute(sql)
         resultado = cursor.fetchall() #Lista de itens que estão no Banco de Dados
@@ -298,14 +310,12 @@ def Gerar_ListaDeEntrega():
         for linha in resultado:
             #print("-------------------------------------------------------------------------------------------------------------------------------------")
             cli = str(linha[0]) #Coluna onde está o nome do cliente
-            p = str(linha[1]) #Coluna onde está o pedido
-            quant = str(linha[2]) #Coluna onde está a quantidade
-            rua = str(linha[3]) #Coluna onde está a rua
-            n_casa = str(linha[4]) #Coluna onde está o número da casa
-            bairro = str(linha[5]) #Coluna onde está o bairro 
-            cep = str(linha[6]) #Coluna onde está o CEP
+            rua = str(linha[1]) #Coluna onde está a rua
+            n_casa = str(linha[2]) #Coluna onde está o número da casa
+            bairro = str(linha[3]) #Coluna onde está o bairro 
+            cep = str(linha[4]) #Coluna onde está o CEP
             #Item que contém os dados que estão vindo do Banco de Dados:
-            item = [cli, p, quant, rua, n_casa, bairro, cep]
+            item = [cli, rua, n_casa, bairro, cep]
             #Adição do item ao conjunto de dados:
             dados.append(item)
 

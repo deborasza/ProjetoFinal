@@ -10,6 +10,6 @@ class PedidosDAO:
     
     #Método para inserir o Pedido no Banco de Dados:
     def Inserir_Pedido(self, pedidos):
-        sql = f"insert into pedidos values ('{pedidos.getCliente()}', '{pedidos.getPedido()}' ,{pedidos.getQuantidade()}, {pedidos.getValor()})"
+        sql = f"insert into pedidos values ('{pedidos.getCliente()}', '{pedidos.getPedido()}', {pedidos.getQuantidade()}, {pedidos.getValor()}, '{pedidos.getRua()}', '{pedidos.getNumeroCasa()}', '{pedidos.getBairro()}', {pedidos.getCEP()})"
         self.cursor.execute(sql)
         self.conexao.commit()

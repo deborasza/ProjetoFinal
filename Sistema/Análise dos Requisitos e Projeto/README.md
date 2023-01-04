@@ -13,6 +13,6 @@
 <li>Alterar Pedidos</li>
 <li>Remover Pedidos</li>
 <li>Gerar Relatório de Pedidos</li>
-<li></li>
+<li>Gerar Lista de Entrega para o Motorista</li>
 <li></li>
 </ul>
